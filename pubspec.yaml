@@ -19,6 +19,7 @@ dependencies:
   drift: 2.26.1
   drift_flutter: 0.2.4
   flutter_slidable: 4.0.3
+  carousel_slider: 5.1.1
 
 dev_dependencies:
   flutter_test:

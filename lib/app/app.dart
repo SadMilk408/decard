@@ -35,7 +35,7 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       theme: FlutterEngTrainTheme.light,
       darkTheme: FlutterEngTrainTheme.dark,
-      home: const DictionariesOverviewPage(),
+      home: const DictionariesOverviewScreen(),
     );
   }
 }
