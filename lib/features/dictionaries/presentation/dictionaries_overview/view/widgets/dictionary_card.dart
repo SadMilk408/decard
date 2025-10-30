@@ -1,3 +1,4 @@
+import 'package:english_training_app/extensions/string_extension.dart';
 import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class DictionaryCard extends StatelessWidget {
               await onEdit(dictionary);
             },
             icon: Icons.edit,
-            label: 'Редактировать',
+            label: 'Редактировать'.hardcoded,
             backgroundColor: Colors.blueGrey.shade600,
             foregroundColor: Colors.white,
           ),
@@ -46,7 +47,7 @@ class DictionaryCard extends StatelessWidget {
               }
             },
             icon: Icons.delete,
-            label: 'Удалить',
+            label: 'Удалить'.hardcoded,
             backgroundColor: Colors.red.shade700,
             foregroundColor: Colors.white,
           ),
@@ -79,7 +80,7 @@ class DictionaryCard extends StatelessWidget {
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 4.0),
             child: Text(
-              'Всего слов: ${dictionary.wordsCount}',
+              'Всего слов: ${dictionary.wordsCount}'.hardcoded,
               style: TextStyle(fontSize: 14, color: Colors.grey[400]),
             ),
           ),
@@ -99,16 +100,18 @@ class DictionaryCard extends StatelessWidget {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text('Удалить словарь?'),
-          content: Text('«$title» будет удалён безвозвратно. Продолжить?'),
+          title: Text('Удалить словарь?'.hardcoded),
+          content: Text(
+            '«$title» будет удалён безвозвратно. Продолжить?'.hardcoded,
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Отмена'),
+              child: Text('Отмена'.hardcoded),
             ),
             FilledButton.tonal(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Удалить'),
+              child: Text('Удалить'.hardcoded),
             ),
           ],
         );

@@ -1,13 +1,14 @@
+import 'package:english_training_app/extensions/string_extension.dart';
 import 'package:english_training_app/features/dictionaries/domain/repositories/dictionary_repository.dart';
 import 'package:english_training_app/features/dictionaries/presentation/dictionaries_overview/bloc/dictionary_overview_bloc.dart';
-import 'package:english_training_app/features/dictionaries/presentation/words_overview/view/words_page.dart';
+import 'package:english_training_app/features/dictionaries/presentation/words_overview/view/words_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/widgets.dart';
 
-class DictionariesOverviewPage extends StatelessWidget {
-  const DictionariesOverviewPage({super.key});
+class DictionariesOverviewScreen extends StatelessWidget {
+  const DictionariesOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class DictionariesOverview extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text('Dictionaries'),
+            title: Text('Dictionaries'.hardcoded),
             floating: true,
             pinned: true,
           ),
@@ -52,7 +53,7 @@ class DictionariesOverview extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder:
-                                  (context) => WordsPageProvider(
+                                  (context) => WordsScreenProvider(
                                     dictId: dictionary.id!,
                                     dictName: dictionary.title,
                                   ),
@@ -118,8 +119,8 @@ class DictionariesOverview extends StatelessWidget {
         return AlertDialog(
           title:
               initialTitle == null
-                  ? Text('Добавить словарь')
-                  : Text('Редактировать словарь'),
+                  ? Text('Добавить словарь'.hardcoded)
+                  : Text('Редактировать словарь'.hardcoded),
           content: Form(
             key: formKey,
             child: Column(
@@ -131,7 +132,7 @@ class DictionariesOverview extends StatelessWidget {
                     maxLines: 10,
                     controller: controller,
                     decoration: InputDecoration(
-                      hintText: 'Введите название',
+                      hintText: 'Введите название'.hardcoded,
                       hintStyle: TextStyle(color: Colors.grey[600]),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -143,7 +144,7 @@ class DictionariesOverview extends StatelessWidget {
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Пожалуйста, введите название';
+                        return 'Пожалуйста, введите название'.hardcoded;
                       }
                       return null;
                     },
@@ -154,8 +155,8 @@ class DictionariesOverview extends StatelessWidget {
                 SizedBox(height: 16),
                 Text(
                   initialTitle == null
-                      ? 'Создайте новый словарь для изучения'
-                      : 'Редактируйте название словаря',
+                      ? 'Создайте новый словарь для изучения'.hardcoded
+                      : 'Редактируйте название словаря'.hardcoded,
                   style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   textAlign: TextAlign.center,
                 ),
@@ -165,7 +166,10 @@ class DictionariesOverview extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(''),
-              child: Text('Отмена', style: TextStyle(color: Colors.grey[600])),
+              child: Text(
+                'Отмена'.hardcoded,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -182,7 +186,11 @@ class DictionariesOverview extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Text(initialTitle == null ? 'Добавить' : 'Сохранить'),
+              child: Text(
+                initialTitle == null
+                    ? 'Добавить'.hardcoded
+                    : 'Сохранить'.hardcoded,
+              ),
             ),
           ],
           shape: RoundedRectangleBorder(
