@@ -9,10 +9,12 @@ import 'package:english_training_app/app/app_bloc_observer.dart';
 
 import 'features/dictionaries/data/data.dart';
 import 'features/dictionaries/domain/repositories/repositories.dart';
+import 'features/words/data/data.dart' as words_data;
+import 'features/words/domain/repositories/repositories.dart' as words_domain;
 
 void bootstrap({
   required DictionaryApi dictionaryApi,
-  required WordsApi wordsApi,
+  required words_data.WordsApi wordsApi,
 }) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
@@ -29,7 +31,8 @@ void bootstrap({
     App(
       createDictionaryRepository:
           () => DictRepository(dictionaryApi: dictionaryApi),
-      createWordsRepository: () => WordsRepository(wordsApi: wordsApi),
+      createWordsRepository:
+          () => words_domain.WordsRepository(wordsApi: wordsApi),
     ),
   );
 }

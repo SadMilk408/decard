@@ -1,6 +1,6 @@
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
-import 'package:english_training_app/features/dictionaries/domain/repositories/repositories.dart';
-import 'package:english_training_app/features/dictionaries/presentation/words_overview/bloc/words_overview_bloc.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/repositories/repositories.dart';
+import 'package:english_training_app/features/words/presentation/words_overview/bloc/words_overview_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

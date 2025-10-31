@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:english_training_app/extensions/string_extension.dart';
 
 part 'review_card_words.dart';

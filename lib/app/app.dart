@@ -3,7 +3,8 @@ import 'package:english_training_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../features/dictionaries/domain/repositories/repositories.dart';
+import 'package:english_training_app/features/dictionaries/domain/repositories/repositories.dart';
+import 'package:english_training_app/features/words/domain/repositories/repositories.dart';
 
 class App extends StatelessWidget {
   const App({

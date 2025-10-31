@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:english_training_app/extensions/string_extension.dart';
 import 'package:english_training_app/utils/gesture_effects.dart';
 
@@ -11,13 +11,11 @@ class ReviewCard extends StatefulWidget {
   const ReviewCard({
     super.key,
     required this.word,
-    this.onRevealed,
     this.dragDirection,
     this.dragProgress = 0.0,
   });
 
   final Word word;
-  final VoidCallback? onRevealed;
 
   final DismissDirection? dragDirection;
   final double dragProgress;
@@ -37,15 +35,17 @@ class _ReviewCardState extends State<ReviewCard> {
     final hasExample = widget.word.example?.trim().isNotEmpty ?? false;
     final hasInfo = hasDefinition || hasExample;
 
-    if (!_infoShown && hasInfo) {
+    if (!hasInfo) {
+      setState(() => _revealed = true);
+    } else if (!_infoShown) {
       setState(() => _infoShown = true);
-      return;
+    } else if (!_revealed) {
+      setState(() => _revealed = true);
     }
   }
 
   void _handleTapShowTranslation() {
     setState(() => _revealed = true);
-    widget.onRevealed?.call();
   }
 
   @override
@@ -126,7 +126,6 @@ class _ReviewCardState extends State<ReviewCard> {
             ],
           ),
         ),
-        const SizedBox(height: 16),
       ],
     );
   }

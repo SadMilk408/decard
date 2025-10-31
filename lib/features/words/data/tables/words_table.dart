@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-import 'dictionaries_table.dart';
+import 'package:english_training_app/features/dictionaries/data/tables/dictionaries_table.dart';
 
 class WordsDto extends Table {
   IntColumn get id => integer().autoIncrement()();

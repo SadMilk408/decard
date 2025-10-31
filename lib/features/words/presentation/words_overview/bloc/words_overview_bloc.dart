@@ -1,4 +1,4 @@
-import 'package:english_training_app/features/dictionaries/domain/domain.dart';
+import 'package:english_training_app/features/words/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

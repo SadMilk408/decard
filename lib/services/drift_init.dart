@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:english_training_app/features/dictionaries/data/tables/dictionaries_table.dart';
-import 'package:english_training_app/features/dictionaries/data/tables/words_table.dart';
+import 'package:english_training_app/features/words/data/tables/words_table.dart';
 
 part 'drift_init.g.dart';
 

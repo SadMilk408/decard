@@ -1,7 +1,7 @@
 import 'package:english_training_app/extensions/string_extension.dart';
 import 'package:english_training_app/features/dictionaries/domain/repositories/dictionary_repository.dart';
 import 'package:english_training_app/features/dictionaries/presentation/dictionaries_overview/bloc/dictionary_overview_bloc.dart';
-import 'package:english_training_app/features/dictionaries/presentation/words_overview/view/words_screen.dart';
+import 'package:english_training_app/features/words/presentation/words_overview/view/words_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

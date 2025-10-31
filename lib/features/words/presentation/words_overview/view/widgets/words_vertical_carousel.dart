@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

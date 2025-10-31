@@ -1,4 +1,4 @@
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
 
 abstract class WordsApi {
   WordsApi();

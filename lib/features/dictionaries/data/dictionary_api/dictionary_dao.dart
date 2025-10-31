@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:english_training_app/features/dictionaries/data/dictionary_api/dictionary_api.dart';
 import 'package:english_training_app/features/dictionaries/data/tables/tables.dart';
 import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/data/tables/tables.dart';
 import 'package:english_training_app/services/drift_init.dart';
 
 part 'dictionary_dao.g.dart';

@@ -1,5 +1,5 @@
-import 'package:english_training_app/features/dictionaries/data/data.dart';
-import 'package:english_training_app/features/dictionaries/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/data/words_api/words_api.dart';
+import 'package:english_training_app/features/words/domain/entities/entities.dart';
 
 // TODO: add error handling
 class WordsRepository {
