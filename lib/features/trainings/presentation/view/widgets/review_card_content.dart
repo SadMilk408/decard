@@ -61,22 +61,23 @@ class ReviewCardContent extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              SizedBox(
-                height: 60,
-                child: MaterialButton(
-                  color: Theme.of(context).colorScheme.surface,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  onPressed: onTapShowTranslation,
-                  child: Center(
-                    child: Text(
-                      'Показать перевод'.hardcoded,
-                      style: textTheme.titleLarge,
+              if (infoShown)
+                SizedBox(
+                  height: 60,
+                  child: MaterialButton(
+                    color: Theme.of(context).colorScheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    onPressed: onTapShowTranslation,
+                    child: Center(
+                      child: Text(
+                        'Показать перевод'.hardcoded,
+                        style: textTheme.titleLarge,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
