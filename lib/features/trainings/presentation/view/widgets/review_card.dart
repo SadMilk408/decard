@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:english_training_app/extensions/string_extension.dart';
-import 'package:english_training_app/utils/gesture_effects.dart';
 
 import 'review_card_content.dart';
 
@@ -68,12 +67,12 @@ class _ReviewCardState extends State<ReviewCard> {
                 IgnorePointer(
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 60),
-                    opacity: gestureColorIntensity(widget.dragProgress),
+                    opacity: widget.dragProgress,
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Theme.of(context).colorScheme.surface.withValues(
-                          alpha: gestureColorIntensity(widget.dragProgress),
+                          alpha: widget.dragProgress,
                         ),
                       ),
                     ),
@@ -83,7 +82,7 @@ class _ReviewCardState extends State<ReviewCard> {
                 IgnorePointer(
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 80),
-                    opacity: gestureColorIntensity(widget.dragProgress),
+                    opacity: widget.dragProgress,
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -92,11 +91,7 @@ class _ReviewCardState extends State<ReviewCard> {
                                       DismissDirection.startToEnd
                                   ? Colors.green
                                   : Colors.orange)
-                              .withValues(
-                                alpha: gestureColorIntensity(
-                                  widget.dragProgress,
-                                ),
-                              ),
+                              .withValues(alpha: widget.dragProgress),
                           width: 6,
                         ),
                       ),
@@ -112,11 +107,7 @@ class _ReviewCardState extends State<ReviewCard> {
                                       DismissDirection.startToEnd
                                   ? Colors.green
                                   : Colors.orange)
-                              .withValues(
-                                alpha: gestureColorIntensity(
-                                  widget.dragProgress,
-                                ),
-                              ),
+                              .withValues(alpha: widget.dragProgress),
                         ),
                       ),
                     ),

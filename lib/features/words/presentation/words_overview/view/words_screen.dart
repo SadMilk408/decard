@@ -1,10 +1,10 @@
+import 'package:english_training_app/features/trainings/presentation/view/cards_screen.dart';
 import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:english_training_app/features/words/domain/repositories/repositories.dart';
 import 'package:english_training_app/features/words/presentation/words_overview/bloc/words_overview_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cards_screen.dart';
 import 'widgets/widgets.dart';
 
 class WordsScreenProvider extends StatelessWidget {
@@ -38,7 +38,9 @@ class WordsScreen extends StatelessWidget {
   void _onCardsPressed(BuildContext context, List<Word> words) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CardsScreen(words: words)),
+      MaterialPageRoute(
+        builder: (context) => CardsScreenProvider(words: words),
+      ),
     );
   }
 
