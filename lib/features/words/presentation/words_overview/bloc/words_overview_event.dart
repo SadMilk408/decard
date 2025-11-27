@@ -15,20 +15,20 @@ final class WordsOverviewSubscriptionRequested extends WordsOverviewEvent {
 
 final class WordsOverviewAddWordRequested extends WordsOverviewEvent {
   const WordsOverviewAddWordRequested({required this.word});
-  final Word word;
+  final WordFormData word;
 }
 
 final class WordsOverviewUpdateWordRequested extends WordsOverviewEvent {
   const WordsOverviewUpdateWordRequested({required this.word});
-  final Word word;
+  final WordFormData word;
 }
 
 final class WordsOverviewDeleteWordRequested extends WordsOverviewEvent {
-  const WordsOverviewDeleteWordRequested({required this.word});
-  final Word word;
+  const WordsOverviewDeleteWordRequested({required this.wordId});
+  final int wordId;
 }
 
 final class WordsOverviewUndoDeleteWordRequested extends WordsOverviewEvent {
   const WordsOverviewUndoDeleteWordRequested({required this.word});
-  final Word word;
+  final WordFormData word;
 }

@@ -1,4 +1,5 @@
 import 'package:english_training_app/features/words/domain/domain.dart';
+import 'package:english_training_app/features/words/domain/entities/word_form_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -89,7 +90,7 @@ class WordsOverviewBloc extends Bloc<WordsOverviewEvent, WordsOverviewState> {
     emit(state.copyWith(actionStatus: () => WordsOverviewActionStatus.loading));
 
     try {
-      await _wordsRepository.deleteWordById(event.word.id!);
+      await _wordsRepository.deleteWordById(event.wordId);
       emit(
         state.copyWith(actionStatus: () => WordsOverviewActionStatus.success),
       );

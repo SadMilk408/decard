@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:english_training_app/features/words/data/words_api/words_api.dart';
 import 'package:english_training_app/features/words/data/tables/words_table.dart';
 import 'package:english_training_app/features/words/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/word_form_data.dart';
 import 'package:english_training_app/services/drift_init.dart';
 
 part 'words_dao.g.dart';
@@ -35,22 +36,22 @@ class WordsDao extends DatabaseAccessor<AppDatabase>
   }
 
   @override
-  Future<void> saveWord(Word word) async {
+  Future<void> saveWord(WordFormData data) async {
     await into(wordsDto).insert(
       WordsDtoCompanion.insert(
-        dictionaryId: word.dictionaryId,
-        mainWord: word.mainWord,
-        translate: word.translate,
-        example: Value(word.example),
-        translationExample: Value(word.translationExample),
-        definition: Value(word.definition),
-        translationDefinition: Value(word.translationDefinition),
+        dictionaryId: data.dictionaryId,
+        mainWord: data.mainWord,
+        translate: data.translate,
+        example: Value(data.example),
+        translationExample: Value(data.translationExample),
+        definition: Value(data.definition),
+        translationDefinition: Value(data.translationDefinition),
       ),
     );
   }
 
   @override
-  Future<void> updateWord(Word word) async {
+  Future<void> updateWord(WordFormData data) async {
     // TODO: implement updateWord
   }
 

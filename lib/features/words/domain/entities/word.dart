@@ -1,6 +1,6 @@
 class Word {
   Word({
-    this.id,
+    required this.id,
     required this.dictionaryId,
     required this.mainWord,
     required this.translate,
@@ -10,7 +10,7 @@ class Word {
     this.translationDefinition,
   });
 
-  final int? id;
+  final int id;
   final int dictionaryId;
 
   final String mainWord;

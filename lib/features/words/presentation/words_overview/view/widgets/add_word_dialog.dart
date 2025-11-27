@@ -1,5 +1,6 @@
 import 'package:english_training_app/features/words/domain/entities/entities.dart';
 import 'package:english_training_app/extensions/string_extension.dart';
+import 'package:english_training_app/features/words/domain/entities/word_form_data.dart';
 import 'package:flutter/material.dart';
 
 class AddWordDialog extends StatelessWidget {
@@ -115,7 +116,7 @@ class AddWordDialog extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              final word = Word(
+              final word = WordFormData(
                 dictionaryId: dictId,
                 mainWord: mainWordController.text.trim(),
                 translate: translateController.text.trim(),

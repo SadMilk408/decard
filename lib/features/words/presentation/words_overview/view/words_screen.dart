@@ -1,5 +1,6 @@
 import 'package:english_training_app/features/trainings/presentation/view/cards_screen.dart';
 import 'package:english_training_app/features/words/domain/entities/entities.dart';
+import 'package:english_training_app/features/words/domain/entities/word_form_data.dart';
 import 'package:english_training_app/features/words/domain/repositories/repositories.dart';
 import 'package:english_training_app/features/words/presentation/words_overview/bloc/words_overview_bloc.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class WordsScreen extends StatelessWidget {
     );
   }
 
-  Future<Word?> _showAddWordDialog(BuildContext context) async {
+  Future<WordFormData?> _showAddWordDialog(BuildContext context) async {
     final TextEditingController mainWordController = TextEditingController();
     final TextEditingController translateController = TextEditingController();
 
