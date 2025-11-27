@@ -750,6 +750,264 @@ class WordsDtoCompanion extends UpdateCompanion<WordsDtoData> {
   }
 }
 
+class $WordProgressDtoTable extends WordProgressDto
+    with TableInfo<$WordProgressDtoTable, WordProgressDtoData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $WordProgressDtoTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _wordIdMeta = const VerificationMeta('wordId');
+  @override
+  late final GeneratedColumn<int> wordId = GeneratedColumn<int>(
+    'word_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES words_dto (id)',
+    ),
+  );
+  static const VerificationMeta _isLearningMeta = const VerificationMeta(
+    'isLearning',
+  );
+  @override
+  late final GeneratedColumn<bool> isLearning = GeneratedColumn<bool>(
+    'is_learning',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_learning" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, wordId, isLearning];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'word_progress_dto';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<WordProgressDtoData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('word_id')) {
+      context.handle(
+        _wordIdMeta,
+        wordId.isAcceptableOrUnknown(data['word_id']!, _wordIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_wordIdMeta);
+    }
+    if (data.containsKey('is_learning')) {
+      context.handle(
+        _isLearningMeta,
+        isLearning.isAcceptableOrUnknown(data['is_learning']!, _isLearningMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  WordProgressDtoData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return WordProgressDtoData(
+      id:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}id'],
+          )!,
+      wordId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}word_id'],
+          )!,
+      isLearning:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}is_learning'],
+          )!,
+    );
+  }
+
+  @override
+  $WordProgressDtoTable createAlias(String alias) {
+    return $WordProgressDtoTable(attachedDatabase, alias);
+  }
+}
+
+class WordProgressDtoData extends DataClass
+    implements Insertable<WordProgressDtoData> {
+  final int id;
+  final int wordId;
+  final bool isLearning;
+  const WordProgressDtoData({
+    required this.id,
+    required this.wordId,
+    required this.isLearning,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['word_id'] = Variable<int>(wordId);
+    map['is_learning'] = Variable<bool>(isLearning);
+    return map;
+  }
+
+  WordProgressDtoCompanion toCompanion(bool nullToAbsent) {
+    return WordProgressDtoCompanion(
+      id: Value(id),
+      wordId: Value(wordId),
+      isLearning: Value(isLearning),
+    );
+  }
+
+  factory WordProgressDtoData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return WordProgressDtoData(
+      id: serializer.fromJson<int>(json['id']),
+      wordId: serializer.fromJson<int>(json['wordId']),
+      isLearning: serializer.fromJson<bool>(json['isLearning']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'wordId': serializer.toJson<int>(wordId),
+      'isLearning': serializer.toJson<bool>(isLearning),
+    };
+  }
+
+  WordProgressDtoData copyWith({int? id, int? wordId, bool? isLearning}) =>
+      WordProgressDtoData(
+        id: id ?? this.id,
+        wordId: wordId ?? this.wordId,
+        isLearning: isLearning ?? this.isLearning,
+      );
+  WordProgressDtoData copyWithCompanion(WordProgressDtoCompanion data) {
+    return WordProgressDtoData(
+      id: data.id.present ? data.id.value : this.id,
+      wordId: data.wordId.present ? data.wordId.value : this.wordId,
+      isLearning:
+          data.isLearning.present ? data.isLearning.value : this.isLearning,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WordProgressDtoData(')
+          ..write('id: $id, ')
+          ..write('wordId: $wordId, ')
+          ..write('isLearning: $isLearning')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, wordId, isLearning);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is WordProgressDtoData &&
+          other.id == this.id &&
+          other.wordId == this.wordId &&
+          other.isLearning == this.isLearning);
+}
+
+class WordProgressDtoCompanion extends UpdateCompanion<WordProgressDtoData> {
+  final Value<int> id;
+  final Value<int> wordId;
+  final Value<bool> isLearning;
+  const WordProgressDtoCompanion({
+    this.id = const Value.absent(),
+    this.wordId = const Value.absent(),
+    this.isLearning = const Value.absent(),
+  });
+  WordProgressDtoCompanion.insert({
+    this.id = const Value.absent(),
+    required int wordId,
+    this.isLearning = const Value.absent(),
+  }) : wordId = Value(wordId);
+  static Insertable<WordProgressDtoData> custom({
+    Expression<int>? id,
+    Expression<int>? wordId,
+    Expression<bool>? isLearning,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (wordId != null) 'word_id': wordId,
+      if (isLearning != null) 'is_learning': isLearning,
+    });
+  }
+
+  WordProgressDtoCompanion copyWith({
+    Value<int>? id,
+    Value<int>? wordId,
+    Value<bool>? isLearning,
+  }) {
+    return WordProgressDtoCompanion(
+      id: id ?? this.id,
+      wordId: wordId ?? this.wordId,
+      isLearning: isLearning ?? this.isLearning,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (wordId.present) {
+      map['word_id'] = Variable<int>(wordId.value);
+    }
+    if (isLearning.present) {
+      map['is_learning'] = Variable<bool>(isLearning.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WordProgressDtoCompanion(')
+          ..write('id: $id, ')
+          ..write('wordId: $wordId, ')
+          ..write('isLearning: $isLearning')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -757,6 +1015,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this,
   );
   late final $WordsDtoTable wordsDto = $WordsDtoTable(this);
+  late final $WordProgressDtoTable wordProgressDto = $WordProgressDtoTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -764,6 +1025,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     dictionariesDto,
     wordsDto,
+    wordProgressDto,
   ];
 }
 
@@ -1062,6 +1324,26 @@ final class $$WordsDtoTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
+
+  static MultiTypedResultKey<$WordProgressDtoTable, List<WordProgressDtoData>>
+  _wordProgressDtoRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.wordProgressDto,
+    aliasName: $_aliasNameGenerator(db.wordsDto.id, db.wordProgressDto.wordId),
+  );
+
+  $$WordProgressDtoTableProcessedTableManager get wordProgressDtoRefs {
+    final manager = $$WordProgressDtoTableTableManager(
+      $_db,
+      $_db.wordProgressDto,
+    ).filter((f) => f.wordId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _wordProgressDtoRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$WordsDtoTableFilterComposer
@@ -1129,6 +1411,31 @@ class $$WordsDtoTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> wordProgressDtoRefs(
+    Expression<bool> Function($$WordProgressDtoTableFilterComposer f) f,
+  ) {
+    final $$WordProgressDtoTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.wordProgressDto,
+      getReferencedColumn: (t) => t.wordId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WordProgressDtoTableFilterComposer(
+            $db: $db,
+            $table: $db.wordProgressDto,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 }
 
@@ -1258,6 +1565,31 @@ class $$WordsDtoTableAnnotationComposer
     );
     return composer;
   }
+
+  Expression<T> wordProgressDtoRefs<T extends Object>(
+    Expression<T> Function($$WordProgressDtoTableAnnotationComposer a) f,
+  ) {
+    final $$WordProgressDtoTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.wordProgressDto,
+      getReferencedColumn: (t) => t.wordId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WordProgressDtoTableAnnotationComposer(
+            $db: $db,
+            $table: $db.wordProgressDto,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$WordsDtoTableTableManager
@@ -1273,7 +1605,7 @@ class $$WordsDtoTableTableManager
           $$WordsDtoTableUpdateCompanionBuilder,
           (WordsDtoData, $$WordsDtoTableReferences),
           WordsDtoData,
-          PrefetchHooks Function({bool dictionaryId})
+          PrefetchHooks Function({bool dictionaryId, bool wordProgressDtoRefs})
         > {
   $$WordsDtoTableTableManager(_$AppDatabase db, $WordsDtoTable table)
     : super(
@@ -1336,10 +1668,15 @@ class $$WordsDtoTableTableManager
                         ),
                       )
                       .toList(),
-          prefetchHooksCallback: ({dictionaryId = false}) {
+          prefetchHooksCallback: ({
+            dictionaryId = false,
+            wordProgressDtoRefs = false,
+          }) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [],
+              explicitlyWatchedTables: [
+                if (wordProgressDtoRefs) db.wordProgressDto,
+              ],
               addJoins: <
                 T extends TableManagerState<
                   dynamic,
@@ -1373,7 +1710,29 @@ class $$WordsDtoTableTableManager
                 return state;
               },
               getPrefetchedDataCallback: (items) async {
-                return [];
+                return [
+                  if (wordProgressDtoRefs)
+                    await $_getPrefetchedData<
+                      WordsDtoData,
+                      $WordsDtoTable,
+                      WordProgressDtoData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$WordsDtoTableReferences
+                          ._wordProgressDtoRefsTable(db),
+                      managerFromTypedResult:
+                          (p0) =>
+                              $$WordsDtoTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).wordProgressDtoRefs,
+                      referencedItemsForCurrentItem:
+                          (item, referencedItems) =>
+                              referencedItems.where((e) => e.wordId == item.id),
+                      typedResults: items,
+                    ),
+                ];
               },
             );
           },
@@ -1393,7 +1752,304 @@ typedef $$WordsDtoTableProcessedTableManager =
       $$WordsDtoTableUpdateCompanionBuilder,
       (WordsDtoData, $$WordsDtoTableReferences),
       WordsDtoData,
-      PrefetchHooks Function({bool dictionaryId})
+      PrefetchHooks Function({bool dictionaryId, bool wordProgressDtoRefs})
+    >;
+typedef $$WordProgressDtoTableCreateCompanionBuilder =
+    WordProgressDtoCompanion Function({
+      Value<int> id,
+      required int wordId,
+      Value<bool> isLearning,
+    });
+typedef $$WordProgressDtoTableUpdateCompanionBuilder =
+    WordProgressDtoCompanion Function({
+      Value<int> id,
+      Value<int> wordId,
+      Value<bool> isLearning,
+    });
+
+final class $$WordProgressDtoTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $WordProgressDtoTable,
+          WordProgressDtoData
+        > {
+  $$WordProgressDtoTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $WordsDtoTable _wordIdTable(_$AppDatabase db) =>
+      db.wordsDto.createAlias(
+        $_aliasNameGenerator(db.wordProgressDto.wordId, db.wordsDto.id),
+      );
+
+  $$WordsDtoTableProcessedTableManager get wordId {
+    final $_column = $_itemColumn<int>('word_id')!;
+
+    final manager = $$WordsDtoTableTableManager(
+      $_db,
+      $_db.wordsDto,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_wordIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$WordProgressDtoTableFilterComposer
+    extends Composer<_$AppDatabase, $WordProgressDtoTable> {
+  $$WordProgressDtoTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isLearning => $composableBuilder(
+    column: $table.isLearning,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$WordsDtoTableFilterComposer get wordId {
+    final $$WordsDtoTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.wordId,
+      referencedTable: $db.wordsDto,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WordsDtoTableFilterComposer(
+            $db: $db,
+            $table: $db.wordsDto,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$WordProgressDtoTableOrderingComposer
+    extends Composer<_$AppDatabase, $WordProgressDtoTable> {
+  $$WordProgressDtoTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isLearning => $composableBuilder(
+    column: $table.isLearning,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$WordsDtoTableOrderingComposer get wordId {
+    final $$WordsDtoTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.wordId,
+      referencedTable: $db.wordsDto,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WordsDtoTableOrderingComposer(
+            $db: $db,
+            $table: $db.wordsDto,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$WordProgressDtoTableAnnotationComposer
+    extends Composer<_$AppDatabase, $WordProgressDtoTable> {
+  $$WordProgressDtoTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<bool> get isLearning => $composableBuilder(
+    column: $table.isLearning,
+    builder: (column) => column,
+  );
+
+  $$WordsDtoTableAnnotationComposer get wordId {
+    final $$WordsDtoTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.wordId,
+      referencedTable: $db.wordsDto,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$WordsDtoTableAnnotationComposer(
+            $db: $db,
+            $table: $db.wordsDto,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$WordProgressDtoTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $WordProgressDtoTable,
+          WordProgressDtoData,
+          $$WordProgressDtoTableFilterComposer,
+          $$WordProgressDtoTableOrderingComposer,
+          $$WordProgressDtoTableAnnotationComposer,
+          $$WordProgressDtoTableCreateCompanionBuilder,
+          $$WordProgressDtoTableUpdateCompanionBuilder,
+          (WordProgressDtoData, $$WordProgressDtoTableReferences),
+          WordProgressDtoData,
+          PrefetchHooks Function({bool wordId})
+        > {
+  $$WordProgressDtoTableTableManager(
+    _$AppDatabase db,
+    $WordProgressDtoTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer:
+              () =>
+                  $$WordProgressDtoTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => $$WordProgressDtoTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer:
+              () => $$WordProgressDtoTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> wordId = const Value.absent(),
+                Value<bool> isLearning = const Value.absent(),
+              }) => WordProgressDtoCompanion(
+                id: id,
+                wordId: wordId,
+                isLearning: isLearning,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int wordId,
+                Value<bool> isLearning = const Value.absent(),
+              }) => WordProgressDtoCompanion.insert(
+                id: id,
+                wordId: wordId,
+                isLearning: isLearning,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          $$WordProgressDtoTableReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
+          prefetchHooksCallback: ({wordId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                T extends TableManagerState<
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic
+                >
+              >(state) {
+                if (wordId) {
+                  state =
+                      state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.wordId,
+                            referencedTable: $$WordProgressDtoTableReferences
+                                ._wordIdTable(db),
+                            referencedColumn:
+                                $$WordProgressDtoTableReferences
+                                    ._wordIdTable(db)
+                                    .id,
+                          )
+                          as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$WordProgressDtoTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $WordProgressDtoTable,
+      WordProgressDtoData,
+      $$WordProgressDtoTableFilterComposer,
+      $$WordProgressDtoTableOrderingComposer,
+      $$WordProgressDtoTableAnnotationComposer,
+      $$WordProgressDtoTableCreateCompanionBuilder,
+      $$WordProgressDtoTableUpdateCompanionBuilder,
+      (WordProgressDtoData, $$WordProgressDtoTableReferences),
+      WordProgressDtoData,
+      PrefetchHooks Function({bool wordId})
     >;
 
 class $AppDatabaseManager {
@@ -1403,4 +2059,6 @@ class $AppDatabaseManager {
       $$DictionariesDtoTableTableManager(_db, _db.dictionariesDto);
   $$WordsDtoTableTableManager get wordsDto =>
       $$WordsDtoTableTableManager(_db, _db.wordsDto);
+  $$WordProgressDtoTableTableManager get wordProgressDto =>
+      $$WordProgressDtoTableTableManager(_db, _db.wordProgressDto);
 }

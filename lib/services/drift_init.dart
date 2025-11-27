@@ -1,11 +1,12 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:english_training_app/features/dictionaries/data/tables/dictionaries_table.dart';
+import 'package:english_training_app/features/trainings/data/tables/word_progress.dart';
 import 'package:english_training_app/features/words/data/tables/words_table.dart';
 
 part 'drift_init.g.dart';
 
-@DriftDatabase(tables: [DictionariesDto, WordsDto])
+@DriftDatabase(tables: [DictionariesDto, WordsDto, WordProgressDto])
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter
   // and a constructor telling drift where the database should be stored.
@@ -31,17 +32,29 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration {
     return MigrationStrategy(
       onCreate: (Migrator m) async {
-        print('Создание таблиц базы данных');
         await m.createAll();
-        print('Таблицы созданы успешно');
       },
-      beforeOpen: (openingDetails) async {
-        // final m = Migrator(this);
-        // for (final table in allTables) {
-        //   await m.deleteTable(table.actualTableName);
-        //   await m.createTable(table);
-        // }
-      },
+      onUpgrade: (Migrator m, int from, int to) async {},
+      beforeOpen: (openingDetails) async {},
     );
+  }
+
+  /// Очищает все данные из всех таблиц БД
+  Future<void> clearAllTables() async {
+    // Удаляем все данные из всех таблиц
+    await delete(wordProgressDto).go();
+    await delete(wordsDto).go();
+    await delete(dictionariesDto).go();
+  }
+
+  /// Полностью удаляет БД и пересоздаёт её заново
+  Future<void> deleteDatabase() async {
+    final migrator = Migrator(this);
+    // Удаляем все таблицы
+    for (final table in allTables) {
+      await migrator.deleteTable(table.actualTableName);
+    }
+    // Пересоздаём все таблицы
+    await migrator.createAll();
   }
 }
